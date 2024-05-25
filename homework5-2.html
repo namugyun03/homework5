@@ -1,0 +1,212 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>놀이공원 입장료</title>
+    <style>
+        .input-wrap {
+            width: 960px;
+            margin: 0 auto;
+        }
+        input[type="text"]
+        {
+            margin-top: 100px;
+            width:150px;
+        }
+        h1 { text-align: center; }
+        th, td { text-align: center; }
+        table, td, th {
+            border-collapse: collapse;
+            border: 1px solid black;
+            margin: 10 auto;
+            padding: 2px;
+            margin-top: 100px;
+        }
+        a { text-decoration: none; }
+        div
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-wrap">
+        <form id = "ticketForm">   
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>구분</th>
+                        <th colspan='2' style="width:100px">어린이</th>
+                        <th colspan='2' style="width:100px">어른</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                       <td style = "width:30px">1</td>
+                       <td style = "width:100px">입장권</td>
+                       <td>7,000</td>
+                       <td>
+                            <p>
+                            <select name="kid_tic">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>10,000</td>
+                        <td>
+                        <p>
+                            <select name="adult_tic">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>입장</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>BIG3</td>
+                        <td>12,000</td>
+                        <td>
+                        <p>
+                            <select name="kid_big3">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>16,000</td>
+                        <td>
+                        <p>
+                            <select name="adult_big3">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>입장+놀이3종</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>자유이용권</td>
+                        <td>21,000</td>
+                        <td>
+                        <p>
+                            <select name="kid_free">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>26,000</td>
+                        <td>
+                        <p>
+                            <select name="adult_free">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>입장+놀이자유</td>
+                    </tr>
+                    <tr>
+                    <td>3</td>
+                        <td>연간이용권</td>
+                        <td>70,000</td>
+                        <td>
+                        <p>
+                            <select name="kid_year">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>90,000</td>
+                        <td>
+                        <p>
+                            <select name="adult_year">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            </p>
+                        </td>
+                        <td>입장+놀이자유</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        <div>
+            <input type="button" value="확인" onclick="calculate()"/>
+            <input type="reset" value="초기화"/>
+        </div>
+        </form>
+        <div class = "result" id = "result"></div>
+    </div>
+
+    <script>
+        function calculate()
+        {
+            const form = document.getElementById('ticketForm');
+            const kidTic = parseInt(form.kid_tic.value) || 0; 
+            const kidBig3 = parseInt(form.kid_big3.value) || 0;
+            const kidFree = parseInt(form.kid_free.value) || 0;
+            const kidYear = parseInt(form.kid_year.value) || 0;
+            const adultTic = parseInt(form.adult_tic.value) || 0;
+            const adultBig3 = parseInt(form.adult_big3.value) || 0;
+            const adultFree = parseInt(form.adult_free.value) || 0;
+            const adultYear = parseInt(form.adult_year.value) || 0;
+
+            const total = kidTic * 7000 + kidBig3 * 12000 + kidFree * 21000 + kidYear * 70000 +
+                  adultTic * 10000 + adultBig3 * 16000 + adultFree * 26000 + adultYear * 90000;
+
+            let resultText = `감사합니다<br>`;
+
+            if (kidTic > 0) resultText += `어린이 입장권 ${kidTic}매<br>`;
+            if (kidBig3 > 0) resultText += `어린이 BIG3 ${kidBig3}매<br>`;
+            if (kidFree > 0) resultText += `어린이 자유이용권 ${kidFree}매<br>`;
+            if (kidYear > 0) resultText += `어린이 연간이용권 ${kidYear}매<br>`;
+            if (adultTic > 0) resultText += `어른 입장권 ${adultTic}매<br>`;
+            if (adultBig3 > 0) resultText += `어른 BIG3 ${adultBig3}매<br>`;
+            if (adultFree > 0) resultText += `어른 자유이용권 ${adultFree}매<br>`;
+            if (adultYear > 0) resultText += `어른 연간이용권 ${adultYear}매<br>`;      
+            resultText += `총합 ${total.toLocaleString()}원 입니다.<br>`;
+            
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
